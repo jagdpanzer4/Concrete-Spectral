@@ -6,3 +6,32 @@ spectral-ui/dist/
 .DS_Store
 Thumbs.db
 *.swp
+
+# PHP dependencies
+vendor/
+composer.lock
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Concrete CMS cache & uploads
+application/files/cache/
+application/files/tmp/
+files/cache/
+files/tmp/
+
+# Build artifacts (project root)
+node_modules/
+dist/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+.editorconfig
+
+# Logs
+*.log
