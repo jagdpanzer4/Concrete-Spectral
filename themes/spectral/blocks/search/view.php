@@ -6,12 +6,12 @@ if (!isset($query) || !is_string($query)) {
 ?>
 <form class="sui-search-form" method="get" action="<?= h($view->url($resultTarget)) ?>" aria-label="<?= h(t('Site search')) ?>" role="search">
 
-    <?php if ($query === '') { ?>
-    <input type="hidden" name="search_paths[]" value="<?= htmlentities($baseSearchPath, ENT_COMPAT, APP_CHARSET) ?>" />
+    <?php if ($query === '' && isset($baseSearchPath) && $baseSearchPath !== '') { ?>
+    <input type="hidden" name="search_paths[]" value="<?= h($baseSearchPath) ?>" />
     <?php } elseif (isset($search_paths) && is_array($search_paths)) {
         foreach ($search_paths as $search_path) {
             if (is_string($search_path) && $search_path !== '') { ?>
-    <input type="hidden" name="search_paths[]" value="<?= htmlentities($search_path, ENT_COMPAT, APP_CHARSET) ?>" />
+    <input type="hidden" name="search_paths[]" value="<?= h($search_path) ?>" />
             <?php }
         }
     } ?>
@@ -27,7 +27,7 @@ if (!isset($query) || !is_string($query)) {
             type="search"
             name="query"
             class="sui-input sui-search-form__input"
-            value="<?= htmlentities($query, ENT_COMPAT, APP_CHARSET) ?>"
+            value="<?= h($query) ?>"
             placeholder="<?= h(t('Search…')) ?>"
             style="flex:1;border-radius:var(--radius-base,4px);"
             autocomplete="off"
