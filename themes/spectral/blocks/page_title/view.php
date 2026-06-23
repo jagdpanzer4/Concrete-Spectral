@@ -3,16 +3,15 @@
 /** @var string $formatting */
 /** @var bool $useFilterTitle */
 
-// Re-apply same filter logic as core (copy from concrete/blocks/page_title/view.php)
-if (!empty($useFilterTitle)) {
+if ($useFilterTitle ?? false) {
     $currentTopic = $currentTopic ?? null;
-    if (is_object($currentTopic) && !empty($useFilterTopic)) {
+    if (is_object($currentTopic) && ($useFilterTopic ?? false)) {
         $title = $controller->formatPageTitle($currentTopic->getTreeNodeDisplayName(), $tagTextFormat ?? false);
     }
-    if (!empty($tag) && !empty($useFilterTag)) {
+    if (isset($tag) && ($useFilterTag ?? false)) {
         $title = $controller->formatPageTitle($tag, $tagTextFormat ?? false);
     }
-    if (!empty($year) && !empty($month) && !empty($useFilterDate)) {
+    if (isset($year) && isset($month) && ($useFilterDate ?? false)) {
         $srv = app('helper/date');
         $title = $controller->formatPageTitle(
             $srv->date($filterDateFormat ?? 'F Y', strtotime("$year-$month-01")),
