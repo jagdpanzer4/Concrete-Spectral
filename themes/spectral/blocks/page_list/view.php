@@ -23,6 +23,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
  */
 
 $c = \Page::getCurrentPage();
+$dh = $dh ?? \Core::make('helper/date');
 
 if (is_object($c) && $c->isEditMode() && $controller->isBlockEmpty()) {
     echo '<div class="ccm-edit-mode-disabled-item">' . t('Empty Page List Block.') . '</div>';
@@ -109,8 +110,11 @@ if (is_object($c) && $c->isEditMode() && $controller->isBlockEmpty()) {
                 </h3>
                 <?php endif; ?>
 
-                <?php if (isset($includeDate) && $includeDate && $date): ?>
-                <time class="sui-page-list__date" datetime="<?= h($page->getCollectionDatePublicObject()->format('Y-m-d\TH:i:s')) ?>" style="font-size:var(--text-sm,0.875rem);color:var(--color-text-secondary);">
+                <?php if (isset($includeDate) && $includeDate && $date):
+                    $dateObj = $page->getCollectionDatePublicObject();
+                    $dateIso = $dateObj ? $dateObj->format('Y-m-d\TH:i:s') : '';
+                ?>
+                <time class="sui-page-list__date" <?= $dateIso ? 'datetime="' . h($dateIso) . '"' : '' ?> style="font-size:var(--text-sm,0.875rem);color:var(--color-text-secondary);">
                     <?= h($date) ?>
                 </time>
                 <?php endif; ?>
