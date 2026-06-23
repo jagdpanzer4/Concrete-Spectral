@@ -23,27 +23,29 @@ build_widmo() {
   sed -i.tmp "s|themes/spectral-chromatic/|themes/$name/|g" "$main_scss"
   rm -f "${main_scss}.tmp"
 
+  # 1. Showcase build — generates CSS (index-*.css)
   (cd "$SPECTRAL_UI" && THEME="$name" npm run build 2>&1)
 
   local dist="$SPECTRAL_UI/dist/$name/assets"
   if [ ! -d "$dist" ]; then
-    echo "✗ Build failed — dist not found: $dist" >&2
+    echo "✗ Showcase build failed — dist not found: $dist" >&2
     return 1
   fi
 
-  local css_src js_src css_count js_count
-  # Pick the largest index-*.css for styles.
-  # For JS we always use cms-*.js — the dedicated CMS bundle with Alpine.js.
-  css_count=$(ls "$dist"/index-*.css 2>/dev/null | wc -l | tr -d ' ')
-  js_count=$(ls  "$dist"/cms-*.js  2>/dev/null | wc -l | tr -d ' ')
+  local css_src
   css_src=$(ls -S "$dist"/index-*.css 2>/dev/null | head -1)
-  js_src=$(ls  -S "$dist"/cms-*.js  2>/dev/null | head -1)
+  if [ -z "$css_src" ]; then
+    echo "✗ Build failed — index-*.css missing in $dist" >&2
+    return 1
+  fi
 
-  [ "$css_count" -gt 1 ] && echo "⚠ Multiple index-*.css found ($css_count) — using largest: $(basename "$css_src")"
-  [ "$js_count"  -gt 1 ] && echo "⚠ Multiple cms-*.js  found ($js_count)  — using largest: $(basename "$js_src")"
+  # 2. CMS bundle — single IIFE file with no dynamic imports (no 404 chunks)
+  (cd "$SPECTRAL_UI" && THEME="$name" npm run build:cms 2>&1)
 
-  if [ -z "$css_src" ] || [ -z "$js_src" ]; then
-    echo "✗ Build failed — index-*.css or index-*.js missing in $dist" >&2
+  local cms_dist="$SPECTRAL_UI/dist-cms/$name"
+  local js_src="$cms_dist/cms.js"
+  if [ ! -f "$js_src" ]; then
+    echo "✗ CMS build failed — cms.js missing in $cms_dist" >&2
     return 1
   fi
 
