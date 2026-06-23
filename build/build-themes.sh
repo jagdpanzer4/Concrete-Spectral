@@ -13,7 +13,16 @@ fi
 
 build_widmo() {
   local name=$1
+  local main_scss="$SPECTRAL_UI/src/main.scss"
   echo "→ Building widmo: $name"
+
+  # main.scss has a hardcoded theme import path. Patch it before building,
+  # restore it afterwards — even on error via trap.
+  cp "$main_scss" "${main_scss}.bak"
+  trap 'mv "${main_scss}.bak" "$main_scss" 2>/dev/null; trap - RETURN' RETURN
+  sed -i.tmp "s|themes/spectral-chromatic/|themes/$name/|g" "$main_scss"
+  rm -f "${main_scss}.tmp"
+
   (cd "$SPECTRAL_UI" && THEME="$name" npm run build 2>&1)
 
   local dist="$SPECTRAL_UI/dist/$name/assets"
