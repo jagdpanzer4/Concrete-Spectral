@@ -1,0 +1,8 @@
+# Submodule build artifacts
+spectral-ui/node_modules/
+spectral-ui/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
