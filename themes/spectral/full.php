@@ -15,6 +15,7 @@ $thUrl = $theme->getThemeURL();
 ]); ?>
 <link rel="stylesheet" href="<?= h($thUrl) ?>/css/theme.css">
 <link rel="stylesheet" href="<?= h($thUrl) ?>/css/<?= h($widmo) ?>/main.css">
+<?= $view->getThemeStyles() ?>
 </head>
 <body class="ccm-page-id-<?= $c->getCollectionID() ?> sui-theme-<?= h($widmo) ?>">
 <div class="ccm-page">
