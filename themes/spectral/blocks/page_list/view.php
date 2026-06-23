@@ -110,7 +110,7 @@ if (is_object($c) && $c->isEditMode() && $controller->isBlockEmpty()) {
                 <?php endif; ?>
 
                 <?php if (isset($includeDate) && $includeDate && $date): ?>
-                <time class="sui-page-list__date" datetime="<?= h($page->getCollectionDatePublic()) ?>" style="font-size:var(--text-sm,0.875rem);color:var(--color-text-secondary);">
+                <time class="sui-page-list__date" datetime="<?= h($page->getCollectionDatePublicObject()->format('Y-m-d\TH:i:s')) ?>" style="font-size:var(--text-sm,0.875rem);color:var(--color-text-secondary);">
                     <?= h($date) ?>
                 </time>
                 <?php endif; ?>
