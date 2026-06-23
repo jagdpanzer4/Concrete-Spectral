@@ -1,0 +1,5 @@
+Name: Spectral
+Description: Concrete CMS theme powered by Spectral UI design system. Supports swappable visual personalities (widma) for instant visual transformation.
+Version: 1.0.0
+Author: Concrete-Spectral
+URL: https://github.com/jagdpanzer4/Concrete-Spectral
