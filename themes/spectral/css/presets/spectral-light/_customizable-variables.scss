@@ -1,0 +1,30 @@
+// ============================================================
+// Preset: Spectral Light
+// Jasna osobowość wizualna — białe tło, marka violet.
+// ALL vars use !default — CCMS injects its overrides before.
+// ============================================================
+
+// Brand
+$brand-color:       #7c3aed !default;
+$brand-hover-color: #5b21b6 !default;
+$accent-color:      #0891b2 !default;
+
+// Background
+$bg-color:          #ffffff !default;
+$bg-surface-color:  #f8fafc !default;
+$bg-elevated-color: #f1f5f9 !default;
+
+// Text
+$text-color:        #0f172a !default;
+$text-muted-color:  #475569 !default;
+
+// Border
+$border-color:      #e2e8f0 !default;
+
+// Radius
+$radius-base:       8px !default;
+$radius-large:      16px !default;
+
+// Typography
+$font-display: 'Plus Jakarta Sans', system-ui, sans-serif !default;
+$font-body:    'Inter', system-ui, sans-serif !default;

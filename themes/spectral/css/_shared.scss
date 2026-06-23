@@ -1,0 +1,87 @@
+// ============================================================
+// Spectral Theme — Shared SCSS (SkinCustomizerType)
+// This file is compiled by CCMS scssphp with preset variables
+// injected BEFORE this file. Never hard-code values here.
+// ============================================================
+
+// Compute brand-rgb from $brand-color (scssphp supports color functions)
+$_brand-r: red($brand-color);
+$_brand-g: green($brand-color);
+$_brand-b: blue($brand-color);
+
+// Compute accent-rgb
+$_accent-r: red($accent-color);
+$_accent-g: green($accent-color);
+$_accent-b: blue($accent-color);
+
+// Derive elevation shadows from bg-color luminance
+// (simplified: always use brand-color for chromatic glow feel)
+$_brand-hex: $brand-color;
+
+:root {
+    // --- Brand ---
+    --color-brand:         #{$brand-color};
+    --color-brand-hover:   #{$brand-hover-color};
+    --color-brand-glow:    #{$accent-color};
+    --color-brand-rgb:     #{$_brand-r}, #{$_brand-g}, #{$_brand-b};
+
+    // --- Accent ---
+    --color-accent:        #{$accent-color};
+    --color-accent-hover:  #{darken($accent-color, 10%)};
+
+    // --- Background ---
+    --color-bg:            #{$bg-color};
+    --color-bg-surface:    #{$bg-surface-color};
+    --color-bg-elevated:   #{$bg-elevated-color};
+
+    // --- Text ---
+    --color-text:          #{$text-color};
+    --color-text-muted:    #{$text-muted-color};
+    --color-text-inverse:  #{if(lightness($bg-color) > 50%, #020617, #f8fafc)};
+
+    // --- Borders ---
+    --color-border:        #{$border-color};
+    --color-border-focus:  #{$brand-color};
+    --color-border-hover:  #{mix($border-color, $brand-color, 80%)};
+
+    // --- Radius ---
+    --radius-sm:   #{max(0px, $radius-base - 4px)};
+    --radius-md:   #{$radius-base};
+    --radius-lg:   #{$radius-large};
+    --radius-xl:   #{$radius-large * 1.5};
+    --radius-2xl:  #{$radius-large * 2};
+    --radius-full: 9999px;
+
+    // --- Typography ---
+    --font-family-display: #{$font-display};
+    --font-family-body:    #{$font-body};
+
+    // --- Elevation shadows (adapts to light/dark based on bg luminance) ---
+    @if lightness($bg-color) > 50% {
+        // Light mode — soft neutral shadows
+        --shadow-elevation-0: none;
+        --shadow-elevation-1: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
+        --shadow-elevation-2: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06);
+        --shadow-elevation-3: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+        --shadow-elevation-4: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.05);
+        --shadow-elevation-5: 0 25px 50px -12px rgba(0,0,0,0.12);
+    } @else {
+        // Dark mode — colored brand glow
+        --shadow-elevation-0: none;
+        --shadow-elevation-1: 0 1px 3px 0 rgba(0,0,0,0.4), 0 0 0 1px rgba(#{$_brand-r},#{$_brand-g},#{$_brand-b},0.05);
+        --shadow-elevation-2: 0 4px 12px -2px rgba(0,0,0,0.5), 0 0 0 1px rgba(#{$_brand-r},#{$_brand-g},#{$_brand-b},0.08);
+        --shadow-elevation-3: 0 8px 24px -4px rgba(0,0,0,0.6), 0 0 20px rgba(#{$_brand-r},#{$_brand-g},#{$_brand-b},0.12);
+        --shadow-elevation-4: 0 16px 40px -6px rgba(0,0,0,0.7), 0 0 40px rgba(#{$_brand-r},#{$_brand-g},#{$_brand-b},0.18);
+        --shadow-elevation-5: 0 24px 60px -8px rgba(0,0,0,0.8), 0 0 60px rgba(#{$_brand-r},#{$_brand-g},#{$_brand-b},0.25);
+    }
+
+    // --- Background effect params (gradient mesh / particles) ---
+    --mg-color-1: #{$brand-color};
+    --mg-color-2: #{mix($brand-color, $accent-color, 60%)};
+    --mg-color-3: #{$accent-color};
+    --mg-color-4: #{mix($accent-color, $text-muted-color, 70%)};
+    --mg-opacity: #{if(lightness($bg-color) > 50%, 0.10, 0.40)};
+
+    --pt-color: #{$brand-color};
+    --ff-color: #{$accent-color};
+}

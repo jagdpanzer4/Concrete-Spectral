@@ -1,0 +1,30 @@
+// ============================================================
+// Preset: Spectral Chromatic (default)
+// Customizable variables exposed in the CCMS Theme Customizer.
+// ALL vars use !default — CCMS injects its overrides before.
+// ============================================================
+
+// Brand
+$brand-color:       #7c3aed !default;
+$brand-hover-color: #a855f7 !default;
+$accent-color:      #06b6d4 !default;
+
+// Background
+$bg-color:          #020617 !default;
+$bg-surface-color:  #0f172a !default;
+$bg-elevated-color: #1e293b !default;
+
+// Text
+$text-color:        #f8fafc !default;
+$text-muted-color:  #94a3b8 !default;
+
+// Border
+$border-color:      #1e293b !default;
+
+// Radius
+$radius-base:       8px !default;
+$radius-large:      16px !default;
+
+// Typography
+$font-display: 'Plus Jakarta Sans', system-ui, sans-serif !default;
+$font-body:    'Inter', system-ui, sans-serif !default;

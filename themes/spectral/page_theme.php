@@ -2,12 +2,23 @@
 namespace Application\Theme\Spectral;
 
 use Concrete\Core\Page\Theme\Theme;
+use Concrete\Core\Page\Theme\CustomizableInterface;
+use Concrete\Core\StyleCustomizer\Customizer\Type\SkinCustomizerType;
+use Concrete\Core\StyleCustomizer\Customizer\Type\TypeInterface;
 
-class PageTheme extends Theme
+class PageTheme extends Theme implements CustomizableInterface
 {
     protected $pThemeName        = 'Spectral';
     protected $pThemeDescription = 'Concrete CMS theme powered by Spectral UI design system.';
     protected $pThemeVersion     = '1.0.0';
+
+    public function getThemeCustomizerType(): TypeInterface
+    {
+        /** @var SkinCustomizerType $type */
+        $type = $this->app->make(SkinCustomizerType::class);
+        $type->setLanguage('scss');
+        return $type;
+    }
 
     public function registerAssets(): void
     {

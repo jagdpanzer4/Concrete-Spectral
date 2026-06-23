@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<styles version="2.0" lang="scss">
+
+    <set name="Brand Colors">
+
+        <style type="color" name="Brand Color" variable="brand-color">
+            <description>Primary brand color used for buttons, links and accents.</description>
+        </style>
+
+        <style type="color" name="Accent Color" variable="accent-color">
+            <description>Secondary accent used for highlights and badges.</description>
+        </style>
+
+        <style type="color" name="Brand Hover" variable="brand-hover-color">
+            <description>Brand color on hover state.</description>
+        </style>
+
+    </set>
+
+    <set name="Background">
+
+        <style type="color" name="Page Background" variable="bg-color">
+            <description>Main page background color.</description>
+        </style>
+
+        <style type="color" name="Surface Background" variable="bg-surface-color">
+            <description>Cards and panels background.</description>
+        </style>
+
+        <style type="color" name="Elevated Background" variable="bg-elevated-color">
+            <description>Modals and dropdowns background.</description>
+        </style>
+
+    </set>
+
+    <set name="Typography">
+
+        <style type="color" name="Body Text" variable="text-color">
+            <description>Default text color.</description>
+        </style>
+
+        <style type="color" name="Muted Text" variable="text-muted-color">
+            <description>Secondary / subdued text.</description>
+        </style>
+
+        <style type="font" name="Display Font" variable="font-display">
+            <description>Font used for headings and display text.</description>
+        </style>
+
+        <style type="font" name="Body Font" variable="font-body">
+            <description>Font used for body copy and UI.</description>
+        </style>
+
+    </set>
+
+    <set name="Borders and Radius">
+
+        <style type="color" name="Border Color" variable="border-color">
+            <description>Default border and divider color.</description>
+        </style>
+
+        <style type="size" name="Base Radius" variable="radius-base">
+            <description>Corner rounding for cards and buttons (e.g. 8px).</description>
+        </style>
+
+        <style type="size" name="Large Radius" variable="radius-large">
+            <description>Corner rounding for larger containers (e.g. 16px).</description>
+        </style>
+
+    </set>
+
+</styles>

@@ -1,0 +1,5 @@
+// main.scss — Spectral Light preset entry point
+// Import order is critical: customizable-variables FIRST so !default wins.
+
+@import 'customizable-variables';
+@import '../../shared';
