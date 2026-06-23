@@ -144,9 +144,9 @@ $captcha         = $surveyBlockInfo['displayCaptcha'] ? $app->make('helper/valid
                 ?>
 
                 <?php if ($hasError) { ?>
-                <span class="sui-form__error" role="alert">
-                    <?= h($errorDetails[$question['msqID']]) ?>
-                </span>
+                    <?php foreach ((array)($errorDetails[$question['msqID']] ?? []) as $errMsg): ?>
+                    <span class="sui-form__error" role="alert"><?= h($errMsg) ?></span>
+                    <?php endforeach; ?>
                 <?php } ?>
 
             </div>
