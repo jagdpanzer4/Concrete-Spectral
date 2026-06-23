@@ -1,0 +1,3 @@
+[submodule "spectral-ui"]
+	path = spectral-ui
+	url = https://github.com/jagdpanzer4/Spectral-UI
