@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 THEME=${1:-all}
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -22,9 +22,16 @@ build_widmo() {
     return 1
   fi
 
-  local css_src js_src
-  css_src=$(ls "$dist"/index-*.css 2>/dev/null | head -1)
-  js_src=$(ls  "$dist"/index-*.js  2>/dev/null | head -1)
+  local css_src js_src css_count js_count
+  # Pick the largest index-*.css/js — in multi-entry Vite builds the shared
+  # bundle is the biggest file; head -1 on a size-sorted list is deterministic.
+  css_count=$(ls "$dist"/index-*.css 2>/dev/null | wc -l | tr -d ' ')
+  js_count=$(ls  "$dist"/index-*.js  2>/dev/null | wc -l | tr -d ' ')
+  css_src=$(ls -S "$dist"/index-*.css 2>/dev/null | head -1)
+  js_src=$(ls  -S "$dist"/index-*.js  2>/dev/null | head -1)
+
+  [ "$css_count" -gt 1 ] && echo "⚠ Multiple index-*.css found ($css_count) — using largest: $(basename "$css_src")"
+  [ "$js_count"  -gt 1 ] && echo "⚠ Multiple index-*.js  found ($js_count)  — using largest: $(basename "$js_src")"
 
   if [ -z "$css_src" ] || [ -z "$js_src" ]; then
     echo "✗ Build failed — index-*.css or index-*.js missing in $dist" >&2
