@@ -44,7 +44,7 @@ if ($navType === 0 && !$showDots) {
 }
 ?>
 
-<div class="sui-slider"
+<div class="sui-slider sui-slider--overlay"
      role="region"
      aria-label="<?= t('Image Slider') ?>"
      <?php if ($maxWidth): ?>style="max-width: <?= (int) $maxWidth ?>px"<?php endif; ?>
@@ -68,25 +68,22 @@ if ($navType === 0 && !$showDots) {
 
     <?php if ($total > 0): ?>
 
-    <div class="sui-slider__track" aria-live="polite" aria-atomic="false">
+    <div class="sui-slider__track"
+         aria-live="polite"
+         aria-atomic="false"
+         :style="`transform:translateX(-${current * 100}%)`">
         <?php foreach ($slides as $i => $row): ?>
             <?php
             $f      = \File::getByID($row['fID']);
             $imgSrc = '';
-            $imgW   = null;
-            $imgH   = null;
             $imgAlt = h($row['title'] ?: t('Slide %s', $i + 1));
 
             if (is_object($f) && !$f->isError()) {
                 $fv     = $f->getVersion();
                 $imgSrc = $fv->getURL();
-                $imgW   = $fv->getAttribute('width') ?: null;
-                $imgH   = $fv->getAttribute('height') ?: null;
             }
             ?>
             <div class="sui-slider__slide"
-                 x-show="current === <?= $i ?>"
-                 x-transition.opacity.duration.<?= (int) ($speed ?? 500) ?>ms
                  :aria-hidden="current !== <?= $i ?> ? 'true' : 'false'">
 
                 <?php if ($row['linkURL']): ?>

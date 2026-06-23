@@ -32,15 +32,15 @@ build_widmo() {
   fi
 
   local css_src js_src css_count js_count
-  # Pick the largest index-*.css/js — in multi-entry Vite builds the shared
-  # bundle is the biggest file; head -1 on a size-sorted list is deterministic.
+  # Pick the largest index-*.css for styles.
+  # For JS we always use cms-*.js — the dedicated CMS bundle with Alpine.js.
   css_count=$(ls "$dist"/index-*.css 2>/dev/null | wc -l | tr -d ' ')
-  js_count=$(ls  "$dist"/index-*.js  2>/dev/null | wc -l | tr -d ' ')
+  js_count=$(ls  "$dist"/cms-*.js  2>/dev/null | wc -l | tr -d ' ')
   css_src=$(ls -S "$dist"/index-*.css 2>/dev/null | head -1)
-  js_src=$(ls  -S "$dist"/index-*.js  2>/dev/null | head -1)
+  js_src=$(ls  -S "$dist"/cms-*.js  2>/dev/null | head -1)
 
   [ "$css_count" -gt 1 ] && echo "⚠ Multiple index-*.css found ($css_count) — using largest: $(basename "$css_src")"
-  [ "$js_count"  -gt 1 ] && echo "⚠ Multiple index-*.js  found ($js_count)  — using largest: $(basename "$js_src")"
+  [ "$js_count"  -gt 1 ] && echo "⚠ Multiple cms-*.js  found ($js_count)  — using largest: $(basename "$js_src")"
 
   if [ -z "$css_src" ] || [ -z "$js_src" ]; then
     echo "✗ Build failed — index-*.css or index-*.js missing in $dist" >&2
