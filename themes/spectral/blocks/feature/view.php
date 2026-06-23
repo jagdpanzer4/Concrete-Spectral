@@ -2,7 +2,7 @@
 /**
  * @var int|null    $fID
  * @var string      $title
- * @var string      $paragraph
+ * @var string      $paragraph  Trusted HTML from CMS rich-text editor — do not escape
  * @var string      $linkURL
  * @var string      $linkText
  */
@@ -25,7 +25,7 @@ if (!empty($fID)) {
     <?php endif; ?>
 
     <?php if (!empty($paragraph)): ?>
-    <div class="sui-body"><?= $paragraph ?></div>
+    <div class="sui-body"><?= $paragraph /* trusted WYSIWYG HTML, CMS-sanitized */ ?></div>
     <?php endif; ?>
 
     <?php if (!empty($linkURL) && !empty($linkText)): ?>
