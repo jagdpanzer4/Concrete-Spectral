@@ -23,7 +23,7 @@ if (empty($options)) { return; }
            class="sui-chip sui-chip--outlined<?= $isSelected ? ' sui-chip--active' : '' ?>"
            style="display:inline-flex;align-items:center;padding:var(--space-1,4px) var(--space-3,12px);border-radius:var(--radius-full,9999px);border:1px solid var(--color-border);font-size:.875rem;text-decoration:none;"
            <?= $isSelected ? 'aria-current="true"' : '' ?>>
-            <?= h($option->getSelectAttributeOptionDisplayValue()) ?>
+            <?= $option->getSelectAttributeOptionDisplayValue() ?>
         </a>
     </span>
     <?php endforeach; ?>

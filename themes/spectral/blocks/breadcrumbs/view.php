@@ -12,7 +12,7 @@ $breadcrumbItems = $breadcrumb->getItems();
             <?php if ($item->isActive()): ?>
             <span aria-current="page" style="color:var(--color-muted);"><?= h($item->getName()) ?></span>
             <?php else: ?>
-            <a href="<?= h($item->getURL()) ?>" class="sui-link"><?= h($item->getName()) ?></a>
+            <a href="<?= h($item->getUrl()) ?>" class="sui-link"><?= h($item->getName()) ?></a>
             <?php endif; ?>
         </li>
         <?php ++$i; endforeach; ?>
