@@ -35,7 +35,7 @@ $c = \Concrete\Core\Page\Page::getCurrentPage();
                     :aria-expanded="open.toString()"
                     aria-haspopup="true"
                     <?= $ariaCurrent ?>
-                ><?= h($ni->name) ?><span class="sui-nav__caret" aria-hidden="true" :class="{ 'sui-nav__caret--open': open }"></span></button>
+                ><?= $ni->name ?><span class="sui-nav__caret" aria-hidden="true" :class="{ 'sui-nav__caret--open': open }"></span></button>
                 <ul class="sui-nav__dropdown"
                     x-show="open"
                     x-transition:enter="sui-transition-enter"
@@ -49,13 +49,13 @@ $c = \Concrete\Core\Page\Page::getCurrentPage();
             <li class="sui-nav__item">
                 <a href="<?= h($ni->url) ?>"
                    target="<?= h($ni->target) ?>"
-                   class="<?= $linkClass ?>"<?= $ariaCurrent ?>><?= h($ni->name) ?></a>
+                   class="<?= $linkClass ?>"<?= $ariaCurrent ?>><?= $ni->name ?></a>
                 <ul class="sui-nav__dropdown sui-nav__dropdown--nested">
         <?php else: ?>
             <li class="sui-nav__item">
                 <a href="<?= h($ni->url) ?>"
                    target="<?= h($ni->target) ?>"
-                   class="<?= $linkClass ?>"<?= $ariaCurrent ?>><?= h($ni->name) ?></a>
+                   class="<?= $linkClass ?>"<?= $ariaCurrent ?>><?= $ni->name ?></a>
             </li>
             <?= str_repeat('</ul></li>', $ni->subDepth) ?>
         <?php endif; ?>
