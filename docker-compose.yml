@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: spectral-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-spectral_cms}
+      MYSQL_USER: ${DB_USER:-spectral}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-spectralpass}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: spectral-cms
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-spectral_cms}
+      DB_USER: ${DB_USER:-spectral}
+      DB_PASSWORD: ${DB_PASSWORD:-spectralpass}
+    volumes:
+      # CMS files (downloaded separately — not in git)
+      - ./cms:/var/www/html
+      # Live-mount Spectral theme (changes instantly without rebuild)
+      - ./themes/spectral:/var/www/html/application/themes/spectral
+    ports:
+      - "${CMS_PORT:-8080}:80"
+
+volumes:
+  db_data:
