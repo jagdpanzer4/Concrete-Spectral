@@ -15,7 +15,7 @@ class PageTheme extends Theme implements CustomizableInterface
     public function getThemeCustomizerType(): TypeInterface
     {
         /** @var SkinCustomizerType $type */
-        $type = $this->app->make(SkinCustomizerType::class);
+        $type = \Core::make(SkinCustomizerType::class);
         $type->setLanguage('scss');
         return $type;
     }
