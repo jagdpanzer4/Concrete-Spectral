@@ -31,10 +31,15 @@ if (isset($button)) {
     if ($buttonSize === 'lg') {
         $button->addClass('sui-btn--lg');
     }
-    if ($buttonIcon && $button->getValue()) {
-        $iconTag = '<span class="me-2" aria-hidden="true">' . $iconTag . '</span>';
+    // Only prepend icon when a real icon class is selected (avoid "fas fa-" with no name)
+    if (!empty($buttonIcon) && trim($buttonIcon) !== '' && $button->getValue()) {
+        $button->setValue('<span class="sui-btn__icon" aria-hidden="true">' . $iconTag . '</span>' . $button->getValue());
     }
-    $button->setValue($iconTag . $button->getValue());
+    // Suppress button entirely when no valid URL (avoids href="" in markup)
+    $buttonHref = (string)($button->getAttribute('href') ?? '');
+    if ($buttonHref === '' || $buttonHref === '#') {
+        $button = null;
+    }
 }
 
 $titleFormat = $titleFormat ?? 'h1';
@@ -61,7 +66,7 @@ $titleFormat = $titleFormat ?? 'h1';
             <?= $body ?>
         <?php endif; ?>
         <?php if (isset($button)): ?>
-            <div class="mt-4"><?= $button ?></div>
+            <div style="margin-top:var(--space-4)"><?= $button ?></div>
         <?php endif; ?>
     </div>
 </section>
