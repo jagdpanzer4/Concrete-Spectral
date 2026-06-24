@@ -28,6 +28,7 @@ class Controller extends Package
         'spectral_alert',
         'spectral_social_links',
         'spectral_orbital',
+        'spectral_bg_effects',
     ];
 
     public function install()

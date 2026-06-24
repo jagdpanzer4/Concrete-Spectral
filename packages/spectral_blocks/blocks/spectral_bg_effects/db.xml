@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralBgEffects">
+        <field name="bID"         type="I"  size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="effectType"  type="C"  size="30"  default="gradient-mesh"/>
+        <field name="colorA"      type="C"  size="30"  default=""/>
+        <field name="colorB"      type="C"  size="30"  default=""/>
+        <field name="colorC"      type="C"  size="30"  default=""/>
+        <field name="intensity"   type="C"  size="10"  default="medium"/>
+        <field name="animated"    type="I"  size="1"   default="1"/>
+        <field name="particleCount" type="I" size="5"  default="40"/>
+        <field name="minHeight"   type="C"  size="20"  default="400px"/>
+        <field name="padding"     type="C"  size="10"  default="xl"/>
+        <field name="textColor"   type="C"  size="10"  default="light"/>
+        <field name="content"     type="X2"/>
+    </table>
+</schema>
