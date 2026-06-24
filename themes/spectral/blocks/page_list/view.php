@@ -66,11 +66,12 @@ if (is_object($c) && $c->isEditMode() && $controller->isBlockEmpty()) {
                 ? $th->wordSafeShortText($description, $controller->truncateChars)
                 : $description;
 
-            if ($page->getCollectionPointerExternalLink() !== '') {
-                $url    = $page->getCollectionPointerExternalLink();
+            $extLink = (string) ($page->getCollectionPointerExternalLink() ?? '');
+            if ($extLink !== '') {
+                $url    = $extLink;
                 $target = $page->openCollectionPointerExternalLinkInNewWindow() ? '_blank' : '_self';
             } else {
-                $url    = $page->getCollectionLink();
+                $url    = (string) $page->getCollectionLink();
                 $target = $page->getAttribute('nav_target') ?: '_self';
             }
 

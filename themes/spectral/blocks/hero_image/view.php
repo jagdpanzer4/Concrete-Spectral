@@ -20,19 +20,19 @@ $heightVh    = (int) $height ?: 60;
 $heightStyle = "min-height:{$heightVh}vh;";
 
 if (isset($button)) {
-    $buttonColor = $buttonColor ?? null;
+    // Map core hero_image button styles to Spectral UI classes
     if ($buttonStyle === 'outline') {
-        $button->addClass('btn btn-outline-' . $buttonColor);
+        $button->addClass('sui-btn sui-btn-ghost');
     } elseif ($buttonStyle === 'link') {
-        $button->addClass('btn btn-link');
+        $button->addClass('sui-btn sui-btn-ghost');
     } else {
-        $button->addClass('btn btn-' . $buttonColor);
+        $button->addClass('sui-btn sui-btn-primary');
     }
-    if ($buttonSize) {
-        $button->addClass('btn-' . $buttonSize);
+    if ($buttonSize === 'lg') {
+        $button->addClass('sui-btn--lg');
     }
     if ($buttonIcon && $button->getValue()) {
-        $iconTag = '<span class="me-3">' . $iconTag . '</span>';
+        $iconTag = '<span class="me-2" aria-hidden="true">' . $iconTag . '</span>';
     }
     $button->setValue($iconTag . $button->getValue());
 }
