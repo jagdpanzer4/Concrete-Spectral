@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralOrbital">
+        <field name="bID"            type="I" size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="centerIcon"     type="C" size="100" default=""/>
+        <field name="centerLabel"    type="C" size="255" default=""/>
+        <field name="centerSublabel" type="C" size="255" default=""/>
+        <field name="ringSize"       type="C" size="10"  default="md"/>
+        <field name="animSpeed"      type="C" size="10"  default="normal"/>
+        <field name="showRing"       type="I" size="1"   default="1"/>
+        <field name="variant"        type="C" size="20"  default="glow"/>
+    </table>
+    <table name="btSpectralOrbitalItems">
+        <field name="id"        type="I"  size="10" unsigned="true" notnull="true"><key/></field>
+        <field name="bID"       type="I"  size="10" unsigned="true" notnull="true" default="0"/>
+        <field name="sortOrder" type="I"  size="4"  default="0"/>
+        <field name="icon"      type="C"  size="100" default=""/>
+        <field name="label"     type="C"  size="255" default=""/>
+        <field name="sublabel"  type="C"  size="255" default=""/>
+        <field name="color"     type="C"  size="30"  default=""/>
+    </table>
+</schema>

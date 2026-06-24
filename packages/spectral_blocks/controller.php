@@ -27,6 +27,7 @@ class Controller extends Package
         'spectral_feature_strip',
         'spectral_alert',
         'spectral_social_links',
+        'spectral_orbital',
     ];
 
     public function install()
@@ -48,6 +49,7 @@ class Controller extends Package
             'btSpectralGalleryImages'        => 'id',
             'btSpectralFeatureStripItems'    => 'id',
             'btSpectralSocialLinksItems'     => 'id',
+            'btSpectralOrbitalItems'         => 'id',
         ];
         foreach ($tables as $table => $col) {
             try {
