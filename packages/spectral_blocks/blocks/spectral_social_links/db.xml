@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralSocialLinks">
+        <field name="bID"   type="I" size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="style" type="C" size="20" default="icon"/>
+        <field name="size"  type="C" size="20" default="md"/>
+    </table>
+    <table name="btSpectralSocialLinksItems">
+        <field name="id"        type="I"  size="10" unsigned="true" autoincrement="true" notnull="true"><key/></field>
+        <field name="bID"       type="I"  size="10" unsigned="true" notnull="true" default="0"/>
+        <field name="sortOrder" type="I"  size="4"  default="0"/>
+        <field name="platform"  type="C"  size="50"  default=""/>
+        <field name="url"       type="C"  size="512" default=""/>
+        <field name="label"     type="C"  size="100" default=""/>
+    </table>
+</schema>

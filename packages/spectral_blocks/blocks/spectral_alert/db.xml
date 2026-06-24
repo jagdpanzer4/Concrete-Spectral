@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralAlert">
+        <field name="bID"         type="I" size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="alertType"   type="C" size="20"  default="info"/>
+        <field name="alertTitle"  type="C" size="255" default=""/>
+        <field name="alertBody"   type="X2"/>
+        <field name="dismissible" type="I" size="1"   default="0"/>
+        <field name="icon"        type="C" size="100" default=""/>
+    </table>
+</schema>

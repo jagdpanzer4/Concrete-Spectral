@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralGallery">
+        <field name="bID"       type="I" size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="layout"    type="C" size="20"  default="grid"/>
+        <field name="columns"   type="I" size="4"   default="3"/>
+        <field name="lightbox"  type="I" size="1"   default="1"/>
+        <field name="caption"   type="I" size="1"   default="1"/>
+    </table>
+    <table name="btSpectralGalleryImages">
+        <field name="id"        type="I"  size="10" unsigned="true" autoincrement="true" notnull="true"><key/></field>
+        <field name="bID"       type="I"  size="10" unsigned="true" notnull="true" default="0"/>
+        <field name="sortOrder" type="I"  size="4"  default="0"/>
+        <field name="fID"       type="I"  size="10" unsigned="true" default="0"/>
+        <field name="caption"   type="C"  size="500" default=""/>
+        <field name="altText"   type="C"  size="500" default=""/>
+    </table>
+</schema>

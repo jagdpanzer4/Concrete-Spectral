@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btSpectralTabs">
+        <field name="bID"           type="I" size="10" unsigned="true" notnull="true" default="0"><key/></field>
+        <field name="tabStyle"      type="C" size="20"  default="line"/>
+        <field name="headingFormat" type="C" size="5"   default="h3"/>
+        <field name="activeTab"     type="I" size="4"   default="0"/>
+    </table>
+    <table name="btSpectralTabsEntries">
+        <field name="id"        type="I"  size="10" unsigned="true" autoincrement="true" notnull="true"><key/></field>
+        <field name="bID"       type="I"  size="10" unsigned="true" notnull="true" default="0"/>
+        <field name="sortOrder" type="I"  size="4"  default="0"/>
+        <field name="label"     type="C"  size="255" default=""/>
+        <field name="icon"      type="C"  size="100" default=""/>
+        <field name="content"   type="X2"/>
+    </table>
+</schema>
