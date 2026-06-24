@@ -11,7 +11,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var string $intensity  @var bool $animated @var int $particleCount */
 /** @var string $minHeight  @var string $padding @var string $textColor @var string $content */
 
-$uid = 'bg-' . $this->bID;
+$uid = 'bg-' . $bID;
 
 // Resolve colors — fallback to CSS custom properties
 $ca = $colorA ?: 'var(--color-brand)';
@@ -46,7 +46,7 @@ $pSpeed      = $speedMap[$intensity]   ?? '0.5';
 $pConnect    = $connectDist[$intensity] ?? '130';
 ?>
 <section id="<?= $uid ?>"
-         class="sui-bg-effects sui-bg-effects--<?= h($effectType) ?> sui-bg-effects--<?= h($intensity) ?>"
+         class="sui-bg-effects sui-bg-effects--<?= h($effectType) ?> sui-bg-effects--<?= h($intensity) ?><?= $effectType === 'particles' ? ' sui-effect-canvas' : '' ?>"
          <?php if ($effectType === 'particles' && $animated): ?>
          data-effect="particles"
          data-particles-count="<?= $particleCount ?>"
@@ -163,13 +163,14 @@ $pConnect    = $connectDist[$intensity] ?? '130';
     </div><!-- /.sui-bg-effects__layer -->
 
     <?php /* ──────────── CONTENT ──────────── */ ?>
-    <div style="position: relative; z-index: 1; max-width: var(--content-max-width, 1200px); margin: 0 auto;">
+    <div class="<?= $effectType === 'particles' ? 'sui-effect-canvas__content' : '' ?>"
+         style="position: relative; z-index: 1; max-width: var(--content-max-width, 1200px); margin: 0 auto;">
         <?php if ($content): ?>
         <?= $content ?>
         <?php endif; ?>
 
-        <?php /* CCMS-editable areas inside the section */ ?>
-        <?php $area = new \Concrete\Core\Area\Area('BG Content ' . $this->bID); ?>
+        <?php /* CCMS-editable area inside the section */ ?>
+        <?php $area = new \Concrete\Core\Area\Area('BG Content ' . $bID); ?>
         <?php $area->display($c ?? null); ?>
     </div>
 </section>
