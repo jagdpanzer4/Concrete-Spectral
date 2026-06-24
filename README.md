@@ -1,58 +1,91 @@
 # Concrete-Spectral
 
-> Concrete CMS 9.x theme powered by [Spectral UI](https://github.com/jagdpanzer4/Spectral-UI) design system.
+> ConcreteCMS 9.x theme powered by the [Spectral UI](https://github.com/jagdpanzer4/Spectral-UI) design system.  
+> Every standard CMS block is restyled to match Spectral UI tokens. Seven bespoke blocks add functionality unavailable in core CMS.
 
 ## Features
 
-- **Swappable widma** — change visual personality from CMS admin panel
-- **Spectral UI components** as native CMS block types (drag & drop)
-- **Native CMS blocks** restyled to match Spectral UI (content, nav, forms, page list, etc.)
-- **3 page templates** — full width, with sidebar, landing page
-- **Shared hosting ready** — no runtime npm or composer required
+- **Swappable widma** — switch between dark (*Spectral Chromatic*) and light (*Spectral Light*) visual personalities from the CMS admin panel
+- **20 native block templates** — every standard ConcreteCMS block styled with Spectral UI BEM classes
+- **7 custom Spectral blocks** — tabs, gallery/lightbox, feature strip, alert, social links, orbital, background effects
+- **3 page templates** — `full_width`, `full` (with sidebar), `landing`
+- **Alpine.js** — bundled in theme, zero external JS runtime required
+- **Shared hosting ready** — no runtime npm or Composer required; static CSS + vanilla PHP
+
+---
 
 ## Requirements
 
-- Concrete CMS 9.x
-- PHP 8.1+
-- Node.js 18+ + npm *(local build time only)*
+| Requirement | Version |
+|-------------|---------|
+| ConcreteCMS | 9.x |
+| PHP | 8.1+ |
+| Node.js + npm | 18+ *(build-time only)* |
 
-## Setup
+---
 
-### 1. Clone with submodule
+## Quick Start (Docker)
 
 ```bash
 git clone https://github.com/jagdpanzer4/Concrete-Spectral.git
 cd Concrete-Spectral
 git submodule update --init --recursive
+docker compose up -d
+# CMS → http://localhost:8080   admin / Spectral2024!
 ```
 
-### 2. Deploy theme to CMS
+---
 
-Copy `themes/spectral/` into your CMS installation:
-```
-[cms-root]/application/themes/spectral/
-```
+## Manual Deploy to Existing CMS
 
-### 3. Register site attribute
+### 1. Clone with submodule
 
 ```bash
-php concrete/bin/concrete5 c5:exec setup/install-attribute.php
+git clone --recurse-submodules https://github.com/jagdpanzer4/Concrete-Spectral.git
 ```
 
-### 4. Activate theme
+### 2. Copy files
+
+```
+[cms-root]/application/themes/spectral/          ← theme
+[cms-root]/packages/spectral_blocks/             ← custom blocks
+```
+
+### 3. Activate theme
 
 Dashboard → Pages & Themes → Themes → Activate **Spectral**
 
-### 5. Set widmo
+### 4. Install Spectral Blocks package
 
-Dashboard → System & Settings → Sites → Attributes → **Spectral Theme (Widmo)** = `spectral-chromatic`
+Dashboard → Extend ConcreteCMS → find **Spectral UI Blocks** → Install
 
-## Block Templates
+### 5. (Optional) Load demo content
 
-All 20 standard ConcreteCMS block types have Spectral UI templates:
+```bash
+php concrete/bin/concrete5 c5:exec packages/spectral_demo/clean_rebuild.php
+```
 
-| Block | Spectral component |
-|-------|--------------------|
+Browse `/spectral-demo` — sub-pages showcase all blocks.
+
+---
+
+## Available Widma
+
+| Widmo handle | Mode | Description |
+|--------------|------|-------------|
+| `spectral-chromatic` | **Dark** | Intense violet/cyan palette, glow shadows, full spectrum |
+| `spectral-light` | **Light** | Clean whites, soft shadows, violet brand accent |
+
+Switch widmo: Dashboard → Pages & Themes → **Spectral** → Customize → choose widmo.
+
+---
+
+## Native Block Templates (20)
+
+All standard ConcreteCMS block types have Spectral UI templates in `themes/spectral/blocks/`:
+
+| Block handle | Spectral component |
+|--------------|--------------------|
 | `accordion` | `sui-accordion` + Alpine.js |
 | `autonav` | `sui-site-nav` + Alpine.js dropdowns |
 | `breadcrumbs` | `sui-breadcrumb` |
@@ -74,23 +107,23 @@ All 20 standard ConcreteCMS block types have Spectral UI templates:
 | `video` | `sui-video-wrapper` HTML5 `<video>` |
 | `youtube` | `sui-embed` responsive iframe |
 
-## Demo Pages
+---
 
-After installing, run the demo content script:
+## Custom Spectral Blocks (7)
 
-```bash
-php concrete/bin/concrete5 c5:exec packages/spectral_demo/clean_rebuild.php
-```
+Install via the **Spectral UI Blocks** package (`packages/spectral_blocks/`):
 
-Then browse `/spectral-demo` — sub-pages showcase typography, navigation/accordion,
-forms, image slider, and media blocks (testimonial, video, file).
+| Block handle | Description |
+|--------------|-------------|
+| `spectral_tabs` | Tabbed content — `line` and `pills` variants, per-tab HTML, Alpine.js |
+| `spectral_gallery` | Image grid / masonry + Alpine.js lightbox with keyboard nav |
+| `spectral_feature_strip` | Horizontal icon + title + subtitle strip, optional links |
+| `spectral_alert` | Info / success / warning / error banner, dismissible option |
+| `spectral_social_links` | 10 platforms (GitHub, X, LinkedIn, Instagram, YouTube, Facebook, TikTok, Discord, Mastodon, Bluesky) with inline SVG |
+| `spectral_orbital` | CSS-only 3D rotating orbital showcase — center focus + orbiting items, 3 variants (glow/glass/flat) |
+| `spectral_bg_effects` | Section wrapper with animated background — gradient mesh, aurora, radial glow, grid pattern, noise texture, fireflies |
 
-## Available Widma
-
-| Widmo | Mode | Description |
-|-------|------|-------------|
-| `spectral-chromatic` | dark | Intense colors, full spectrum glow |
-| `spectral-light` | light | Clean whites, dark text, violet brand |
+---
 
 ## Building Widma
 
@@ -105,17 +138,21 @@ forms, image slider, and media blocks (testimonial, video, file).
 ./build/watch-theme.sh spectral-chromatic
 ```
 
+---
+
 ## Adding a New Widmo
 
 See [docs/creating-widma.md](docs/creating-widma.md).
 
-## Phase Roadmap
+---
+
+## Phase Status
 
 | Phase | Status | Scope |
 |-------|--------|-------|
 | 1 — Foundation | ✅ | Theme skeleton, build pipeline, 2 widma |
 | 2 — Native blocks | ✅ | Custom templates for all 20 native CMS blocks |
-| 3 — Polish & extras | 🔄 | Sidebar layout, landing page, docs, theme customizer |
-| 4 — Custom blocks | 🔜 | spectral_hero, card_grid, cta, stats |
-| 5 — Effects & atoms | 🔜 | Effect blocks, per-block atom pickers |
-| 6 — QA & docs | 🔜 | spectral-light QA, WCAG 2.1, full docs |
+| 3 — Customizer | ✅ | SkinCustomizerType, CSS skin switching, landing page template |
+| 4 — Stabilization | ✅ | Hero button fix, page_list NULL link fix, form BEM aliases |
+| 5 — Custom blocks | ✅ | 6 custom Spectral blocks (tabs, gallery, feature strip, alert, social links, orbital) |
+| 6 — Background effects | ✅ | `spectral_bg_effects` block, 6 effect types |
