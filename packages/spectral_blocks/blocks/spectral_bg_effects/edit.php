@@ -29,11 +29,12 @@
         <select x-model="effectType"
                 style="width:100%;padding:6px 10px;background:#1a1a2e;color:#e2e8f0;border:1px solid #444;border-radius:5px;">
             <option value="gradient-mesh">Gradient Mesh</option>
+            <option value="particles">Particles (Canvas)</option>
             <option value="aurora">Aurora Borealis</option>
             <option value="radial-glow">Radial Glow</option>
             <option value="grid-pattern">Grid Pattern</option>
             <option value="noise-texture">Noise Texture</option>
-            <option value="fireflies">Fireflies</option>
+            <option value="fireflies">Fireflies (Alpine.js)</option>
         </select>
     </div>
 
@@ -105,7 +106,7 @@
                 <input type="text" x-model="minHeight" placeholder="400px"
                        style="width:100%;padding:5px 8px;background:#1a1a2e;color:#e2e8f0;border:1px solid #444;border-radius:4px;">
             </div>
-            <div x-show="effectType === 'fireflies'">
+            <div x-show="effectType === 'fireflies' || effectType === 'particles'">
                 <label style="display:block;font-size:11px;margin-bottom:3px;">Particle Count</label>
                 <input type="number" x-model.number="particleCount" min="5" max="200"
                        style="width:100%;padding:5px 8px;background:#1a1a2e;color:#e2e8f0;border:1px solid #444;border-radius:4px;">

@@ -11,9 +11,9 @@ class Controller extends BlockController
     protected $btCacheBlockOutput = false;
 
     public function getBlockTypeName(): string        { return t('Spectral Background Effects'); }
-    public function getBlockTypeDescription(): string { return t('Section wrapper with animated background effects: gradient mesh, fireflies, noise, aurora, or grid pattern.'); }
+    public function getBlockTypeDescription(): string { return t('Section wrapper with animated background effects: gradient mesh, particles, fireflies, noise, aurora, or grid pattern.'); }
 
-    private const ALLOWED_EFFECTS   = ['gradient-mesh','fireflies','aurora','noise-texture','grid-pattern','radial-glow'];
+    private const ALLOWED_EFFECTS   = ['gradient-mesh','particles','fireflies','aurora','noise-texture','grid-pattern','radial-glow'];
     private const ALLOWED_INTENSITY = ['subtle','medium','intense'];
     private const ALLOWED_PADDING   = ['none','sm','md','lg','xl'];
     private const ALLOWED_TEXT      = ['light','dark','inherit'];

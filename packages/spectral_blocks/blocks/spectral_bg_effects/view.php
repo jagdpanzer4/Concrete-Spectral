@@ -2,8 +2,8 @@
 /**
  * Spectral Background Effects — view.php
  * Renders a section with animated background effect.
- * Effects are pure CSS (gradient-mesh, aurora, radial-glow, grid-pattern, noise-texture)
- * or CSS + Alpine.js JS (fireflies).
+ * Effects are pure CSS (gradient-mesh, aurora, radial-glow, grid-pattern, noise-texture),
+ * CSS + Alpine.js JS (fireflies), or Canvas API via Spectral UI particles.js.
  */
 defined('C5_EXECUTE') or die('Access Denied.');
 
@@ -33,8 +33,27 @@ $txtColor = $textColor === 'light' ? '#fff' : ($textColor === 'dark' ? '#0f0f1a'
 $animDur = ['subtle' => '18s', 'medium' => '12s', 'intense' => '7s'][$intensity] ?? '12s';
 ?>
 
+<?php
+// For particles effect the canvas is injected by particles.js into the SECTION itself.
+// Convert color to RGB tuple for data-particles-color (format: "r,g,b")
+$particlesColorRgb = '124,58,237'; // default brand violet
+if ($colorA && preg_match('/^#([0-9a-f]{6})$/i', $colorA, $m)) {
+    $particlesColorRgb = implode(',', [hexdec(substr($m[1],0,2)), hexdec(substr($m[1],2,2)), hexdec(substr($m[1],4,2))]);
+}
+$speedMap    = ['subtle' => '0.25', 'medium' => '0.5', 'intense' => '1.0'];
+$connectDist = ['subtle' => '80',   'medium' => '130', 'intense' => '180'];
+$pSpeed      = $speedMap[$intensity]   ?? '0.5';
+$pConnect    = $connectDist[$intensity] ?? '130';
+?>
 <section id="<?= $uid ?>"
          class="sui-bg-effects sui-bg-effects--<?= h($effectType) ?> sui-bg-effects--<?= h($intensity) ?>"
+         <?php if ($effectType === 'particles' && $animated): ?>
+         data-effect="particles"
+         data-particles-count="<?= $particleCount ?>"
+         data-particles-color="<?= $particlesColorRgb ?>"
+         data-particles-speed="<?= $pSpeed ?>"
+         data-particles-connect-distance="<?= $pConnect ?>"
+         <?php endif; ?>
          style="position: relative;
                 overflow: hidden;
                 min-height: <?= h($minHeight) ?>;
@@ -100,6 +119,13 @@ $animDur = ['subtle' => '18s', 'medium' => '12s', 'intense' => '7s'][$intensity]
                 </filter>
                 <rect width="100%" height="100%" filter="url(#<?= $uid ?>-noise)"/>
             </svg>
+        </div>
+
+        <?php elseif ($effectType === 'particles'): ?>
+        <?php /* Canvas is injected by Spectral particles.js via data-effect="particles" on <section>.
+                  Provide a tinted background so particles are visible against dark/light backgrounds. */ ?>
+        <div style="position:absolute;inset:0;
+             background: color-mix(in srgb, <?= $ca ?> <?= (int)($opacity*30) ?>%, transparent);">
         </div>
 
         <?php elseif ($effectType === 'fireflies'): ?>
