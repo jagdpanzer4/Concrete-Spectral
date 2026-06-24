@@ -35,7 +35,27 @@ class Controller extends Package
         foreach (self::BLOCKS as $handle) {
             BlockType::installBlockTypeFromPackage($handle, $pkg);
         }
+        $this->fixAutoIncrements();
         return $pkg;
+    }
+
+    /** ADODB XML v0.3 doesn't reliably set AUTO_INCREMENT — fix after install */
+    private function fixAutoIncrements(): void
+    {
+        $db = $this->app->make('database/connection');
+        $tables = [
+            'btSpectralTabsEntries'         => 'id',
+            'btSpectralGalleryImages'        => 'id',
+            'btSpectralFeatureStripItems'    => 'id',
+            'btSpectralSocialLinksItems'     => 'id',
+        ];
+        foreach ($tables as $table => $col) {
+            try {
+                $db->executeQuery("ALTER TABLE `$table` MODIFY `$col` INT UNSIGNED NOT NULL AUTO_INCREMENT");
+            } catch (\Exception $e) {
+                // ignore if already correct
+            }
+        }
     }
 
     public function upgrade()
